@@ -1,0 +1,29 @@
+{
+  "name": "configurable-redux-example",
+  "version": "1.0.0",
+  "description": "Example to show a configurable usage of redux",
+  "main": "index.js",
+  "repository": "git@github.com:shivamkantival/configurable-redux-example.git",
+  "author": "Shivam Kantival <shivam.kantival@mindtickle.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "immutability-helper": "^3.0.1",
+    "lodash": "^4.17.15",
+    "redux": "^4.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.18.2"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "trailingComma": "es5",
+    "tabWidth": 2
+  }
+}
