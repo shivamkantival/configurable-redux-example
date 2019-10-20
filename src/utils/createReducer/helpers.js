@@ -3,6 +3,7 @@ import _isObject from "lodash/isPlainObject";
 import _isObjectLike from "lodash/isObjectLike";
 import _find from "lodash/find";
 import _noop from "lodash/noop";
+import _map from "lodash/map";
 
 const DATA_TYPES = {
   ARRAY: "ARRAY",
@@ -49,4 +50,56 @@ export function wrapWithKey(baseReducer, key) {
   baseReducer.key = key;
 
   return baseReducer;
+}
+
+function wrapWithInitAndResetReducer(
+  baseReducer,
+  { initialState, resetActionType }
+) {
+  return function withInitAndResetHandler(state = initialState, action) {
+    return action.type === resetActionType
+      ? initialState
+      : baseReducer(state, action);
+  };
+}
+
+export function handleInitAndReset(
+  baseReducer,
+  { initialState, resetActionType }
+) {
+  return initialState && resetActionType
+    ? wrapWithInitAndResetReducer(baseReducer, {
+        initialState,
+        resetActionType,
+      })
+    : baseReducer;
+}
+
+export function flatCombineReducers(reducers) {
+  return function combinedReducer(state = {}, action) {
+    let hasChanged = false;
+    let updatedState = {};
+
+    _map(reducers, reducer => {
+      const { key } = reducer;
+
+      if (key) {
+        const oldKeyedState = state[key];
+        const newKeyedState = reducer(oldKeyedState, action);
+
+        updatedState[key] = newKeyedState;
+        hasChanged = hasChanged || newKeyedState !== oldKeyedState;
+      } else {
+        const updatedNonKeyedState = reducer(state, action);
+
+        updatedState = {
+          ...updatedState,
+          ...updatedNonKeyedState,
+        };
+        hasChanged = hasChanged || state !== updatedNonKeyedState;
+      }
+    });
+
+    return hasChanged ? updatedState : state;
+  };
 }

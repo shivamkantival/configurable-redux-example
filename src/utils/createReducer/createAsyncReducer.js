@@ -1,5 +1,5 @@
 import _get from "lodash/get";
-import createActionTypes from "../../createActionTypes";
+import createActionTypes from "../createActionTypes";
 import { mergeData, wrapWithKey } from "./helpers";
 
 const DEFAULT_INITIAL_STATE = {
@@ -51,14 +51,14 @@ function createDefaultAsyncReducer({
         break;
       case SET_SUCCESS:
         updatedState = processor
-          ? processor(state, action)
+          ? processor(updatedState, action)
           : {
               ...updatedState,
               isLoading: false,
               loaded: true,
               hasError: false,
               error: null,
-              data: merge ? mergeData(_get(state, "data"), data) : data,
+              data: merge ? mergeData(_get(updatedState, "data"), data) : data,
               ...rest,
             };
         break;
@@ -94,7 +94,10 @@ export default function createAsyncReducer(reducerConfig) {
     } = {},
   } = reducerConfig;
   const initialState = createInitialState(stateInitialState);
-  const { SET_SUCCESS, SET_LOADING, SET_FAIL, RESET } = createActionTypes(name);
+  const { SET_SUCCESS, SET_LOADING, SET_FAIL, RESET } = createActionTypes({
+    name,
+    options: { async: true },
+  });
 
   return createDefaultAsyncReducer({
     key,

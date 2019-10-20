@@ -5,20 +5,22 @@ import { createActionTypes } from "../../utils";
 // constants
 import { ACTION_TYPES } from "../../config/constants";
 
-const { SET_LOADING, SET_FAIL, RESET, SET_SUCCESS } = createActionTypes(
-  ACTION_TYPES.SET_STATE_WITH_LOADER
-);
+const { SET_LOADING, SET_FAIL, RESET, SET_SUCCESS } = createActionTypes({
+  name: ACTION_TYPES.SET_STATE_WITH_LOADER,
+  options: { async: true },
+});
 
 const INITIAL_STATE = {
   loading: false,
   loaded: false,
   hasError: false,
+  error: null,
   data: {},
 };
 
 export default function(state = INITIAL_STATE, action) {
   const { type, payload = INITIAL_STATE, meta: { merge = true } = {} } = action;
-  const { data = {}, ...restPayload } = payload;
+  const { data = {}, error, ...restPayload } = payload;
 
   let updatedState = state;
 

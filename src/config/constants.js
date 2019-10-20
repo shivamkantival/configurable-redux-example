@@ -1,19 +1,11 @@
-interface ACTION_TYPES_INTERFACE {
-    [key: string]: string
-}
-
-export const ACTION_TYPES: ACTION_TYPES_INTERFACE = {
+export const ACTION_TYPES = {
   SET_NORMALISED_ARRAY_DATA: "@@namespace/SET_NORMALISED_ARRAY_DATA",
   SET_NORMALISED_OBJECT_DATA: "@@namespace/SET_NORMALISED_OBJECT_DATA",
   SET_PRIMITIVE_DATA: "@@namespace/SET_PRIMITIVE_DATA",
-  SET_STATE_WITH_LOADER: "@@namespace/SET_STATE_WITH_LOADER"
+  SET_STATE_WITH_LOADER: "@@namespace/SET_STATE_WITH_LOADER",
 };
-export const ASYNC_ACTION_TYPE_SUFFIXES: {
-  SUCCESS: string,
-  FAIL: string,
-  RESET: string
-} = {
+export const ACTION_TYPE_SUFFIXES = {
   SUCCESS: "_SUCCESS",
   FAIL: "_FAIL",
-  RESET:"_RESET"
+  RESET: "_RESET",
 };

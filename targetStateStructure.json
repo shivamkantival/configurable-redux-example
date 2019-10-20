@@ -1,0 +1,13 @@
+{
+  "normalisedArrayData": [],
+  "normalisedObjectData": {},
+  "primitiveDataType": "STRING_INT_BOOL",
+  "stateWithLoadingState": {
+    "loading": "bool",
+    "loaded": "bool",
+    "hasError": "bool",
+    "data": "objectLikeData",
+    "meta1": "",
+    "meta2": ""
+  }
+}
