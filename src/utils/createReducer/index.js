@@ -12,7 +12,7 @@ function createReducerWithMultipleConfigs(reducersConfig) {
 
 function createReducer(
   reducerConfig,
-  { initialState = {}, resetActionType = "RESET", ...params }
+  { initialState, resetActionType, ...params } = {}
 ) {
   const hasMultipleReducerConfigs = _isArray(reducerConfig);
 

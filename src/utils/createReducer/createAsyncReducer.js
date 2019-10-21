@@ -33,7 +33,7 @@ function createDefaultAsyncReducer({
   ) {
     const {
       type,
-      payload: { data, error, ...rest },
+      payload: { data, error, ...rest } = {},
       meta: { merge = staticMergeConfig } = {},
     } = action;
 
