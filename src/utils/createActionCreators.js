@@ -25,6 +25,15 @@ function createActionCreatorsForAsyncActionType(actionType) {
   };
 }
 
+function createActionCreatorsForSyncActionType(actionType) {
+  const { ACTION_TYPE, RESET } = createActionTypes(actionType);
+
+  return {
+    RESET: createBaseActionCreator(RESET),
+    ACTION_TYPE: createBaseActionCreator(ACTION_TYPE),
+  };
+}
+
 function createActionCreatorsForObjectLikeConfig(objectLikeActionConfig) {
   const {
     name,
@@ -33,7 +42,7 @@ function createActionCreatorsForObjectLikeConfig(objectLikeActionConfig) {
 
   return async
     ? createActionCreatorsForAsyncActionType(name)
-    : createBaseActionCreator(name);
+    : createActionCreatorsForSyncActionType(name);
 }
 
 export default function createActionCreators(actionConfig) {
@@ -41,5 +50,5 @@ export default function createActionCreators(actionConfig) {
 
   return isObjectLikeConfig
     ? createActionCreatorsForObjectLikeConfig(actionConfig)
-    : createBaseActionCreator(actionConfig);
+    : createActionCreatorsForSyncActionType(actionConfig);
 }
