@@ -30,7 +30,7 @@ debugger;
 
 // start loading data
 state = reducerWithAsyncState(state, {
-  type: ACTION_TYPES.SET_STATE_WITH_LOADER,
+  type: SET_LOADING,
 });
 debugger;
 
