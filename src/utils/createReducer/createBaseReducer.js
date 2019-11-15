@@ -11,9 +11,6 @@ function createReducerWithObjectLikeConfig(reducerConfig) {
 }
 
 export default function createBaseReducer(reducerConfig) {
-  if (_isString(reducerConfig)) {
-    return createSyncReducer({ name: reducerConfig });
-  }
   return _isString(reducerConfig)
     ? createSyncReducer({ name: reducerConfig })
     : createReducerWithObjectLikeConfig(reducerConfig);
